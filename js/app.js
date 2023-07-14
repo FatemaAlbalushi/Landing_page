@@ -61,7 +61,6 @@ function setActiveSection() {
   });
 }
 
-
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {
   navList.addEventListener('click', function(event) {
