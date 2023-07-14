@@ -1,6 +1,7 @@
 // Define Global Variables
 const sections = document.querySelectorAll('section');
 const navList = document.getElementById('navbar__list');
+//const navList = document.querySelector('.page__header nav ul');
 
 // Helper function to check if an element is in the viewport
 function isInViewport(element) {
@@ -22,21 +23,44 @@ function buildNavMenu() {
     anchor.setAttribute('href', `#${section.id}`);
     listItem.appendChild(anchor);
     navList.appendChild(listItem);
+
+    // Add event listener to the menu item
+    anchor.addEventListener('click', function(event) {
+      event.preventDefault();
+      const targetSection = document.querySelector(event.target.getAttribute('href'));
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+
+      // Remove the 'active' class from all menu items
+      document.querySelectorAll('.navbar__menu .menu__link').forEach(function(link) {
+        link.classList.remove('active');
+      });
+
+      // Add the 'active' class to the clicked menu item
+      event.target.classList.add('active');
+    });
   });
 }
 
+
 // Add class 'active' to section when near top of viewport
+
 function setActiveSection() {
   window.addEventListener('scroll', function() {
     sections.forEach(function(section) {
-      if (isInViewport(section)) {
+      const rect = section.getBoundingClientRect();
+      const navItem = document.querySelector(`a[href="#${section.id}"]`);
+      
+      if (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
         section.classList.add('your-active-class');
+        navItem.parentElement.classList.add('active'); // Add class to parent element (list item)
       } else {
         section.classList.remove('your-active-class');
+        navItem.parentElement.classList.remove('active'); // Remove class from parent element (list item)
       }
     });
   });
 }
+
 
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {

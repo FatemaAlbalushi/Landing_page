@@ -74,18 +74,43 @@ section {
     display: inline-block;
 }
 
+/* Highlight the active section in the navigation bar */
+.navbar__menu li.active {
+    background: #333;
+    color: #fff;
+  }
+
+.navbar__menu li.active a {
+    background-color: #ffcc00;
+    color: #dc1313;
+}
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
     font-weight: bold;
     text-decoration: none;
     color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
 }
 
 .navbar__menu .menu__link:hover {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
+}
+
+
+/* Highlight the active menu item */
+.navbar__menu .menu__link.active {
+    background-color: #ffcc00;
+    color: #dc1313;
+    text-decoration: underline;
+  }
+
+  .navbar__menu .menu__link:not(.active) {
+    text-decoration: none;
 }
 
 /* Header Styles */
